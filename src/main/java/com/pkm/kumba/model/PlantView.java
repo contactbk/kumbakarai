@@ -2,7 +2,7 @@ package com.pkm.kumba.model;
 
 import java.time.LocalDate;
 
-public class Plant {
+public class PlantView {
 
     private String name;
     private String type;
@@ -10,7 +10,7 @@ public class Plant {
     private LocalDate createdDate;
     private LocalDate updatedDate;
 
-    public Plant() {
+    public PlantView() {
     }
 
     public String getName() {
