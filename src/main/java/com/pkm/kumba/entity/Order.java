@@ -1,55 +1,49 @@
 package com.pkm.kumba.entity;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
-@SuppressWarnings("serial")
 @Entity
-@Table(name="t_order")
-@NamedQuery(name="Order.findAll",query="FROM Order c")
-public class Order {
+@Table(name = "t_order")
+//@TypeDef(name = "localDateTimeType", typeClass = PersistentDateTime.class)
+public class Order implements Serializable{
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="ID" , updatable=false)
-    private Integer Id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    private Long Id;
 
-    @Column(name="NAME")
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name="TYPE")
+    @Column(name = "TYPE")
     private String type;
 
-    @Column(name="PRICE")
+    @Column(name = "PRICE")
     private Double price;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name="CREATEDDATE")
+   /*
+   //Legacy approach : commented as it follows java.util.Date -
+   @Temporal(TemporalType.DATE)
+    @Column(name="CREATEDDATE", nullable = false)
     private Date createdDate;
+    ----------------------------------------
+   @Column(name="CREATEDDATE", nullable = false)
+    @Type(type="localDateTimeType")
+    private DateTime createdDate;*/
 
-    @Temporal(TemporalType.DATE)
-    @Column(name="UPDATEDDATE")
-    private Date updatedDate;
+    @Column(name = "CREATEDDATE", nullable = false)
+    private LocalDateTime createdDate;
 
+    @Column(name = "UPDATEDDATE", nullable = false)
+    private LocalDateTime updatedDate;
 
-
-    public Order() {
-    }
-
-    public Order(Integer id, String name, String type, Double price, Date createdDate, Date updatedDate) {
-        Id = id;
-        this.name = name;
-        this.type = type;
-        this.price = price;
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
-    }
-
-    public Integer getId() {
+    public Long getId() {
         return Id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         Id = id;
     }
 
@@ -77,19 +71,18 @@ public class Order {
         this.price = price;
     }
 
-    public Date getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Date getUpdatedDate() {
-        return updatedDate;
+    public LocalDateTime getUpdatedDate() {return updatedDate;
     }
 
-    public void setUpdatedDate(Date updatedDate) {
+    public void setUpdatedDate(LocalDateTime updatedDate) {
         this.updatedDate = updatedDate;
     }
 
